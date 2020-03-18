@@ -3,10 +3,17 @@ class ReviewsController < ApplicationController
   include Pagy::Backend
   before_action :set_review, only: %i[show edit destroy update]
   before_action :set_book
-  before_action :authenticate_user!
+  
+ 
 
   def index
     @pagy, @reviews = pagy(@book.reviews, items: 5)
+    respond_to do |format|
+			format.json do
+        reviews = @book.reviews.all.order("created_at DESC")
+        render(json: reviews, status: :ok)
+      end			
+		end
   end
 
   def new
@@ -16,14 +23,26 @@ class ReviewsController < ApplicationController
   def edit; end
 
   def create
-    @review = Review.new(review_params)
-    @review.user = current_user
-    @review.book = @book
-    if @review.save
-      redirect_to @book, notice: 'Review was successfully created.'
+
+    auth_token = request.headers["X-User-Token"]    
+    @review = @book.reviews.new(review_params)
+  
+    if(@review.user.authentication_token == auth_token)   
+    @review.save
+    render json: @review.as_json(), status: :ok 
     else
-      render :new
+      render json: { error: true, message: "Cant verify csrf token."}, 
+      status: 401
+      head(:unauthorized)
     end
+    # @review = Review.new(review_params)
+    # @review.user = current_user
+    # @review.book = @book
+    # if @review.save
+    #   redirect_to @book, notice: 'Review was successfully created.'
+    # else
+    #   render :new
+    # end
   end
 
   def update
@@ -50,7 +69,7 @@ class ReviewsController < ApplicationController
   end
 
   def review_params
-    params.require(:review).permit(:rating, :comment)
+    params.require(:review).permit(:rating, :comment,:user_id)
   end
   
 end

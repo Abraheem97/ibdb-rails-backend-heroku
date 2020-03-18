@@ -2,15 +2,25 @@
 class BooksController < ApplicationController
 	include Pagy::Backend
 	before_action :find_book, only: %i[show edit destroy update upvote add_author show_author]	
-	skip_before_action :authenticate_user!, only: %i[index show show_author]
+	
 		
 						
 	def index  
+
+	
 		if params[:search]
      	@pagy, @books = pagy(Book.by_both(params[:search]), items: 3)
     else
-			@pagy, @books = pagy(Book.all, items: 3)
-    end
+			@pagy, @books = pagy(Book.all, items: 5)
+		end
+		respond_to do |format|
+			format.json do
+        book_json = Book.all
+        render(json: book_json, status: :ok)
+			end
+			format.html		
+		end
+		
 	end
 
 	def show
@@ -59,7 +69,25 @@ class BooksController < ApplicationController
 
 	def show_author
 		@author = @book.author
-	end										
+
+		respond_to do |format|
+			format.json do
+        book_json = @author
+        render(json: book_json, status: :ok)
+			end
+			format.html
+		end
+	end		
+	def devise_current_user
+    respond_to do |format|
+			format.json do
+        if(current_user)
+				render(json: current_user, status: :ok)
+				end
+      end
+			format.html
+		end
+  end								
 	
 	private
 	
@@ -70,5 +98,6 @@ class BooksController < ApplicationController
 	def find_book
 		@book = Book.find(params[:id])
 	end
+
 
 end

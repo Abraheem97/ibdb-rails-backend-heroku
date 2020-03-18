@@ -1,6 +1,8 @@
 <li> 
   <div class = "jumbotron" id="comment_<%= comment.id %>">
     <h3><%= image_tag(comment.user.avatar.url,size: "59x59")%><strong> <%= comment.user.username%> says <br> </h3> 
+    
+    <%= comment.body%><strong><br><br>
     <% if comment.image_file_name? %>
       <div style ="text-align:center;">
         <div class="img-fluid img-thumbnail"> 
@@ -9,7 +11,6 @@
         </div>
       </div> <br><br>
     <% end %> 
-    <%= comment.body%><strong><br><br>
     <%= time_ago_in_words(comment.created_at) %> ago
     <% if can? :delete, comment %>
       <%= link_to "Delete", book_comment_path(@book, comment), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-outline-primary btn-sm", remote: true %>|

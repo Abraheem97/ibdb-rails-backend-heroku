@@ -127,6 +127,7 @@ GEM
       thor (>= 0.14, < 2.0)
     jquery-ui-rails (6.0.1)
       railties (>= 3.2.16)
+    jwt (2.2.1)
     kaminari (1.2.0)
       activesupport (>= 4.1.0)
       kaminari-actionview (= 1.2.0)
@@ -139,6 +140,10 @@ GEM
       activerecord
       kaminari-core (= 1.2.0)
     kaminari-core (1.2.0)
+    launchy (2.5.0)
+      addressable (~> 2.7)
+    letter_opener (1.7.0)
+      launchy (~> 2.2)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -171,9 +176,12 @@ GEM
       mime-types
       mimemagic (~> 0.3.0)
       terrapin (~> 0.6.0)
+    pg (1.2.2)
     public_suffix (4.0.3)
     puma (3.12.2)
     rack (2.2.2)
+    rack-cors (1.1.1)
+      rack (>= 2.0.0)
     rack-pjax (1.1.0)
       nokogiri (~> 1.5)
       rack (>= 1.1)
@@ -268,6 +276,10 @@ GEM
     simple_form (5.0.1)
       actionpack (>= 5.0)
       activemodel (>= 5.0)
+    simple_token_authentication (1.17.0)
+      actionmailer (>= 3.2.6, < 7)
+      actionpack (>= 3.2.6, < 7)
+      devise (>= 3.2, < 6)
     spring (2.1.0)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
@@ -279,7 +291,6 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    sqlite3 (1.4.2)
     temple (0.8.2)
     terrapin (0.6.0)
       climate_control (>= 0.0.3, < 1.0)
@@ -330,19 +341,23 @@ DEPENDENCIES
   haml
   jbuilder (~> 2.5)
   jquery-rails
+  jwt
+  letter_opener
   listen (>= 3.0.5, < 3.2)
   pagy
   paperclip
+  pg (~> 1.2)
   puma (~> 3.11)
+  rack-cors (~> 1.1)
   rails (~> 5.2.4, >= 5.2.4.1)
   rails_admin
   rspec-rails
   sass-rails (~> 5.0)
   selenium-webdriver
   simple_form
+  simple_token_authentication
   spring
   spring-watcher-listen (~> 2.0.0)
-  sqlite3
   toastr-rails
   turbolinks (~> 5)
   tzinfo-data

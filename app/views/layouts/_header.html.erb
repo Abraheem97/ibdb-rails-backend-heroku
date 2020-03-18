@@ -29,7 +29,7 @@
         <% end %>
       </ul>
       
-     <% if request.url == request.base_url || request.url == "http://localhost:3000/" || request.url == "http://localhost:3000/books" %>
+     <% if request.url == request.base_url || request.url == "http://localhost:3001/" || request.url == "http://localhost:3001/books" %>
       <form class= "navbar-form navbar-right"  role= "search">
         <div class = "form-group">            
             <%= form_tag books_path, :method => "get" do %>

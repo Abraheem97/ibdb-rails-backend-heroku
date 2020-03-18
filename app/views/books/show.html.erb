@@ -63,7 +63,7 @@
 <div class = "col-md-7 col-md-offset-1">
   <% if @book.reviews.exists?%>
     <% @book.reviews.includes([:user]).limit(4).each do |review| %>
-      <div class = "jumbotron jumbotron-fluid">
+      <div class = "jumbotron jumbotron-fluid h-2">
         <% review.rating.to_i.times do  %>
           <span class="glyphicon glyphicon-star"></span>
         <% end %>
