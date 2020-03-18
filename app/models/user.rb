@@ -2,7 +2,7 @@ class User < ApplicationRecord
  
   acts_as_token_authenticatable 
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable, :confirmable
+         :recoverable, :rememberable, :validatable
   has_many :reviews, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_attached_file :avatar, styles: { medium: '100x100>', thumb: '59x59>' },
