@@ -4,16 +4,10 @@ App.chat = App.cable.subscriptions.create("ChatChannel", {
   },
   disconnected: function() {},
   received: function(data) {
-    console.log("recieved");
-     $('#comment_pane').prepend("<%= Comment.find(18).body %>");
     
 
   },
   speak: function(message) {
-    return this.perform('speak', {
-      message: message
-    })
-    ;
     
   }
 });
