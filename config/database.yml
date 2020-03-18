@@ -16,8 +16,7 @@ test: &TEST
   password: password
   port: 5432
 
-
-development:
+production:
   adapter: postgresql
   encoding: utf8
   database: ibdb_production
@@ -25,4 +24,3 @@ development:
   username: abraheem
   password: password
   port: 5432
-  
