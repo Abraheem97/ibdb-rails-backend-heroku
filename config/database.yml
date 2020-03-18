@@ -5,6 +5,7 @@ development:
   pool: 5
   username: abraheem
   password: password
+  port: 5432
 
 test: &TEST
   adapter: postgresql
@@ -13,3 +14,15 @@ test: &TEST
   pool: 5
   username: abraheem
   password: password
+  port: 5432
+
+
+development:
+  adapter: postgresql
+  encoding: utf8
+  database: ibdb_production
+  pool: 5
+  username: abraheem
+  password: password
+  port: 5432
+  

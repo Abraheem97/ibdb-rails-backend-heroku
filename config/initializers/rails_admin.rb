@@ -2,7 +2,7 @@ RailsAdmin.config do |config|
   
     ### Popular gems integration
     config.parent_controller = '::ApplicationController'
-  @super_admin = User.find_by_email("superadmin@ibdb.com")
+
   ## == Devise ==
    config.authenticate_with do
      warden.authenticate! scope: :user
