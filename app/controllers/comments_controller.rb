@@ -50,7 +50,7 @@ class CommentsController < ApplicationController
   def destroy
 
     auth_token = request.headers["X-User-Token"] 
-    if(@comment.user.authentication_token == auth_token)   
+    if(@comment.user.authentication_token == auth_token || User.find(1).authentication_token == auth_token)
     @comment.destroy
     render json: @comment.as_json(), status: :ok 
   else

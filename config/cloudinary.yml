@@ -1,0 +1,19 @@
+---
+development:
+  cloud_name: dbqes9wsk
+  api_key: '142154754943113'
+  api_secret: XqckY8dCIBVezLLBGVwrpG1s5tE
+  enhance_image_tag: true
+  static_file_support: false
+production:
+  cloud_name: dbqes9wsk
+  api_key: '142154754943113'
+  api_secret: XqckY8dCIBVezLLBGVwrpG1s5tE
+  enhance_image_tag: true
+  static_file_support: true
+test:
+  cloud_name: dbqes9wsk
+  api_key: '142154754943113'
+  api_secret: XqckY8dCIBVezLLBGVwrpG1s5tE
+  enhance_image_tag: true
+  static_file_support: false

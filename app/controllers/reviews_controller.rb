@@ -54,8 +54,19 @@ class ReviewsController < ApplicationController
   end
 
   def destroy
+
+    auth_token = request.headers["X-User-Token"] 
+    if(@review.user.authentication_token == auth_token || User.find(1).authentication_token == auth_token)   
     @review.destroy
-    redirect_to reviews_url, notice: 'Review was successfully destroyed.'
+    render json: @review.as_json(), status: :ok 
+  else
+    render json: { error: true, message: "Cant verify csrf token."}, 
+    status: 401
+    head(:unauthorized)
+  end
+
+    # @review.destroy
+    # redirect_to reviews_url, notice: 'Review was successfully destroyed.'
   end
 
   private
