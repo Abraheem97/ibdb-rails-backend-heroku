@@ -45,11 +45,24 @@ class BooksController < ApplicationController
 	end
 		
 	def create
-		@book = Book.create(book_params)
-		@author = Author.find_or_create_by(name: @book.author_name)
-		@book.author = @author
-		@book.save	
-		redirect_to @book, notice: 'Successfully created book'
+		auth_token = request.headers["X-User-Token"]
+		
+		user = User.find(params[:user_id])
+
+
+		if(user.moderator_role) 
+			 if(auth_token == user.authentication_token)
+				@book = Book.create(book_params)
+				@author = Author.find_or_create_by(name: @book.author_name)
+				@book.author = @author
+				@book.save	
+			 end
+		end
+		# @book = Book.create(book_params)
+		# @author = Author.find_or_create_by(name: @book.author_name)
+		# @book.author = @author
+		# @book.save	
+		# redirect_to @book, notice: 'Successfully created book'
 	end
 									
 	def edit; end

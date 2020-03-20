@@ -10,4 +10,12 @@ class V1::AuthorsController< ApplicationController
     end
 
   end
+  def getAuthors 
+    authors = Author.pluck(:name)
+      respond_to do |format|
+        format.json do           
+          render json: authors, status: :ok
+        end 
+      end
+    end
 end

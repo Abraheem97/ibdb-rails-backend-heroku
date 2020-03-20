@@ -20,6 +20,7 @@ namespace :v1 do
   get '/:id/user', controller: 'users', action: 'index'
   get'/:user_id/:book_id/bookreviewed', controller: 'users', action: 'hasReviewedBook'
   get '/author/:id/books', controller: 'authors', action:'getBooks'
+  get '/authors', controller: 'authors', action:'getAuthors'
 end
   mount ActionCable.server => '/cable'
 end
