@@ -63,8 +63,17 @@ class BooksController < ApplicationController
 	end
 							
 	def destroy
-		@book.destroy
-		redirect_to root_path
+		auth_token = request.headers["X-User-Token"] 
+    if(User.find(1).authentication_token == auth_token)
+    @book.destroy
+    render json: @book.as_json(), status: :ok 
+  else
+    render json: { error: true, message: "Cant verify csrf token."}, 
+    status: 401
+		head(:unauthorized)
+	end
+		# @book.destroy
+		# redirect_to root_path
 	end
 
 	def show_author
