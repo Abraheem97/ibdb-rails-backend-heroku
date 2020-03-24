@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_24_083438) do
+ActiveRecord::Schema.define(version: 2020_03_24_114946) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 2020_03_24_083438) do
     t.bigint "image_file_size"
     t.datetime "image_updated_at"
     t.text "description"
+    t.string "image_url"
   end
 
   create_table "average_caches", force: :cascade do |t|
@@ -122,6 +123,7 @@ ActiveRecord::Schema.define(version: 2020_03_24_083438) do
     t.boolean "moderator_role", default: false
     t.boolean "user_role", default: true
     t.string "authentication_token", limit: 30
+    t.string "image_url"
     t.index ["authentication_token"], name: "index_users_on_authentication_token", unique: true
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true

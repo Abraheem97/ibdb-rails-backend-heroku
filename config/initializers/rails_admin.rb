@@ -55,7 +55,7 @@ RailsAdmin.config do |config|
 
 config.model 'User' do
   create do
-    include_fields :email, :password, :confirmed_at, :user_role, :moderator_role
+    include_fields :email, :password, :confirmed_at, :user_role, :moderator_role,:image_url
     
     field :admin_role do
       visible do        
@@ -67,7 +67,7 @@ config.model 'User' do
   
   
   edit do
-    include_fields :email, :password, :confirmed_at, :user_role, :moderator_role
+    include_fields :email, :password, :confirmed_at, :user_role, :moderator_role, :image_url
     
     field :admin_role do
       visible do        

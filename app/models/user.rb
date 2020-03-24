@@ -6,7 +6,7 @@ class User < ApplicationRecord
   has_many :reviews, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_attached_file :avatar, styles: { medium: '100x100>', thumb: '59x59>' },
-  default_url: '/assets/missing.png'
+  default_url: 'https://res.cloudinary.com/dbqes9wsk/image/upload/v1585050544/defaults/missing_lmgsmf.png', :storage => :cloudinary,:path => ':id/:style/:filename'
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
 
   def username
@@ -15,6 +15,12 @@ class User < ApplicationRecord
 
   def self.current
     Thread.current[:user]
+  end
+
+
+  def set_image_path
+    self.image_url = self.image.url
+    self.save   
   end
 
   def self.current=(user)

@@ -5,7 +5,7 @@ class V1::UsersController< ApplicationController
     format.json do 
        
       user = User.find(params[:id])    
-      render json: user, only: [:email], status: :ok
+      render json: user, only: [:email,:image_url], status: :ok
     end 
   end
 end
