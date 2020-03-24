@@ -15,6 +15,7 @@
 /tmp/*
 !/log/.keep
 !/tmp/.keep
+storage/
 
 # Ignore uploaded files in development
 20200211052729

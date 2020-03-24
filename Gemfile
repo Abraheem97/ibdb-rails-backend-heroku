@@ -79,7 +79,8 @@ gem 'cancancan'
 gem 'rails_admin'
 gem 'brakeman'
 gem 'pagy'
-
+gem 'mini_magick'
 gem "pg", "~> 1.2"
+gem 'paperclip-cloudinary'
 
 gem "rack-cors", "~> 1.1"
