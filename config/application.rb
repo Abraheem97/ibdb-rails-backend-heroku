@@ -18,7 +18,7 @@ module Ibdb
 
     Rails.application.config.middleware.insert_before 0, Rack::Cors do 
       allow do
-        origins ['https://ibdb-react-frontend.herokuapp.com']
+        origins [Rails.application.secrets.frontend_url]
       
         resource '*',
           headers: :any,
