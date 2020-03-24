@@ -3,6 +3,7 @@ class Book < ApplicationRecord
 
   scope :by_both, -> (search) { where("author_name LIKE ? OR title LIKE ?", "%#{search}%", "%#{search}%") }
   after_create :set_image_path
+  after_update :set_image_path
    
   has_attached_file :image, styles: { medium: '250x300>' }, :storage => :cloudinary,:path => ':id/:style/:filename'
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
