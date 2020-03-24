@@ -355,6 +355,7 @@ DEPENDENCIES
   cancancan
   capybara (>= 2.15)
   chromedriver-helper
+  cloudinary
   coffee-rails (~> 4.2)
   devise
   factory_bot_rails

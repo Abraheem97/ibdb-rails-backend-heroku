@@ -65,6 +65,8 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'paperclip'
+
+gem 'cloudinary'
 gem 'bootstrap_form'
 gem 'haml'
 gem 'jwt'
@@ -82,5 +84,4 @@ gem 'pagy'
 gem 'mini_magick'
 gem "pg", "~> 1.2"
 gem 'paperclip-cloudinary'
-
 gem "rack-cors", "~> 1.1"
