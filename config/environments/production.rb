@@ -69,8 +69,8 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: 'ibdb-rails-backend.herokuapp.com' }
 
   config.action_mailer.smtp_settings = {
-    user_name: Rails.application.secrets.mail_username,
-    password: Rails.application.secrets.mail_password,
+    user_name: "noreplyibdb@gmail.com",
+    password: "password123Abr",
     domain: 'gmail.com',
     address: 'smtp.gmail.com',
     port: '587',
