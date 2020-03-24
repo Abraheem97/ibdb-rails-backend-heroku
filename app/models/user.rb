@@ -19,8 +19,13 @@ class User < ApplicationRecord
 
 
   def set_image_path
+    if self.image.url
     self.image_url = self.image.url
-    self.save   
+    self.save
+    else 
+      self.image_url = 'https://res.cloudinary.com/dbqes9wsk/image/upload/v1585050544/defaults/missing_lmgsmf.png'
+      self.save
+    end   
   end
 
   def self.current=(user)
