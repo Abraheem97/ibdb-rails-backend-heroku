@@ -8,18 +8,18 @@
 
 # Run 'rake db:seed' from terminal to create an Admin User in your database
 
-superadmin = User.new({  email: 'superadmin@ibdb.com',
-               password: 'password', password_confirmation: 'password'})
-    
-    superadmin.toggle!(:superadmin)
+superadmin = User.new(email: 'superadmin@ibdb.com',
+                      password: 'password', password_confirmation: 'password')
 
-    if superadmin.valid?
-      superadmin.save()
+superadmin.toggle!(:superadmin)
 
-    elsif superadmin.errors.any?
-      superadmin.errors.full_messages.each do |msg|
-        puts msg
-      end
-    else
-      puts "****NOT VALID****"
-    end
+if superadmin.valid?
+  superadmin.save
+
+elsif superadmin.errors.any?
+  superadmin.errors.full_messages.each do |msg|
+    puts msg
+  end
+else
+  puts '****NOT VALID****'
+end

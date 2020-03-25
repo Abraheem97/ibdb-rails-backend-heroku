@@ -7,7 +7,9 @@ require 'factory_bot'
 require 'support/factory_bot'
 
 # Prevent database truncation if the environment is production
-abort("The Rails environment is running in production mode!") if Rails.env.production?
+if Rails.env.production?
+  abort('The Rails environment is running in production mode!')
+end
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 

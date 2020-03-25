@@ -1,13 +1,12 @@
 RailsAdmin.config do |config|
-  
-    ### Popular gems integration
-    config.parent_controller = '::ApplicationController'
-  @super_admin = User.find_by_email("superadmin@ibdb.com")
+  ### Popular gems integration
+  config.parent_controller = '::ApplicationController'
+  @super_admin = User.find_by_email('superadmin@ibdb.com')
   ## == Devise ==
-   config.authenticate_with do
-     warden.authenticate! scope: :user
-   end
-   config.current_user_method(&:current_user)
+  config.authenticate_with do
+    warden.authenticate! scope: :user
+  end
+  config.current_user_method(&:current_user)
 
   ## == CancanCan ==
   config.authorize_with :cancancan
@@ -49,33 +48,28 @@ RailsAdmin.config do |config|
   #       field :moderator_role
   #       field :user_role
   #     end
-    
+
   #   end
-  
 
-config.model 'User' do
-  create do
-    include_fields :email, :password, :confirmed_at, :user_role, :moderator_role,:image_url
-    
-    field :admin_role do
-      visible do        
-        bindings[:view].current_user.superadmin?
+  config.model 'User' do
+    create do
+      include_fields :email, :password, :confirmed_at, :user_role, :moderator_role, :image_url
+
+      field :admin_role do
+        visible do
+          bindings[:view].current_user.superadmin?
+        end
       end
     end
 
-  end
-  
-  
-  edit do
-    include_fields :email, :password, :confirmed_at, :user_role, :moderator_role, :image_url
-    
-    field :admin_role do
-      visible do        
-        bindings[:view].current_user.superadmin?
+    edit do
+      include_fields :email, :password, :confirmed_at, :user_role, :moderator_role, :image_url
+
+      field :admin_role do
+        visible do
+          bindings[:view].current_user.superadmin?
+        end
       end
     end
   end
-end
-
-
 end

@@ -1,14 +1,9 @@
 class MessageBroadcastJob < ApplicationJob
   queue_as :default
 
-  def perform(message)
-    
-  end
+  def perform(message); end
 
-  private 
+  private
 
-  def render_message(message)
-  	
-  end
+  def render_message(message); end
 end
-  

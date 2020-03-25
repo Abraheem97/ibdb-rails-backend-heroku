@@ -5,7 +5,6 @@ Rails.application.configure do
   # every request. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.
   config.cache_classes = false
- 
 
   # Do not eager load code on boot.
   config.eager_load = false
@@ -54,18 +53,18 @@ Rails.application.configure do
   config.assets.quiet = true
 
   config.action_mailer.delivery_method = :smtp
-  
+
   config.action_mailer.default_url_options = { host: 'ibdb-rails-backend.herokuapp.com' }
 
   config.action_mailer.smtp_settings = {
-  user_name: Rails.application.secrets.mail_username,
-  password: Rails.application.secrets.mail_password,
-  domain: 'gmail.com',
-  address: 'smtp.gmail.com',
-  port: '587',
-  authentication: :plain,
-  enable_starttls_auto: true
-}
+    user_name: Rails.application.secrets.mail_username,
+    password: Rails.application.secrets.mail_password,
+    domain: 'gmail.com',
+    address: 'smtp.gmail.com',
+    port: '587',
+    authentication: :plain,
+    enable_starttls_auto: true
+  }
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
