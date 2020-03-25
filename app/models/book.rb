@@ -12,10 +12,10 @@ class Book < ApplicationRecord
   has_many :comments
 
   def set_image_path
+    if !image_url
     self.image_url = self.image.url
-  self.save
-    
-    
+    self.save    
+    end
   end
 
 end

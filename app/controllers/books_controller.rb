@@ -50,12 +50,13 @@ class BooksController < ApplicationController
 		user = User.find(params[:user_id])
 
 
-		if(user.moderator_role) 
+		if(user.moderator_role || user.admin_role || user.superadmin)  
 			 if(auth_token == user.authentication_token)
 				@book = Book.create(book_params)
 				@author = Author.find_or_create_by(name: @book.author_name)
 				@book.author = @author
 				@book.save	
+				render json: @book.as_json(), status: :ok 
 			 end
 		end
 		# @book = Book.create(book_params)
@@ -114,7 +115,7 @@ class BooksController < ApplicationController
 	private
 	
 		def book_params
-			params.require(:book).permit(:title,:author_name,:image)
+			params.require(:book).permit(:title,:author_name,:image, :image_url)
 		end
 							
 	def find_book
