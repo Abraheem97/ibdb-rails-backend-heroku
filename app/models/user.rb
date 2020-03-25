@@ -21,10 +21,11 @@ class User < ApplicationRecord
 
   def set_image_path
   
-    
+    if !self.image_url
     self.image_url = self.avatar.url
-    self.save    
-    byebug
+    self.save
+    end    
+    
   end
 
   def self.current=(user)
