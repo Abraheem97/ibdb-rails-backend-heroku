@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_attached_file :avatar, styles: { medium: '100x100>', thumb: '59x59>' },
   default_url: 'https://res.cloudinary.com/dbqes9wsk/image/upload/v1585050544/defaults/missing_lmgsmf.png', :storage => :cloudinary,:path => ':id/:style/:filename'
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
+  after_create :set_image_path
 
   def username
     email.split('@').first
@@ -19,13 +20,11 @@ class User < ApplicationRecord
 
 
   def set_image_path
-    if self.image.url
-    self.image_url = self.image.url
-    self.save
-    else 
-      self.image_url = 'https://res.cloudinary.com/dbqes9wsk/image/upload/v1585050544/defaults/missing_lmgsmf.png'
-      self.save
-    end   
+  
+    
+    self.image_url = self.avatar.url
+    self.save    
+    byebug
   end
 
   def self.current=(user)
