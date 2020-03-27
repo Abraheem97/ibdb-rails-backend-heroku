@@ -54,11 +54,11 @@ Rails.application.configure do
 
   config.action_mailer.delivery_method = :smtp
 
-  config.action_mailer.default_url_options = { host: 'http://localhost:3001/' }
+  config.action_mailer.default_url_options = { host: 'https://ibdb-rails-backend.herokuapp.com'  }
 
 
   config.action_mailer.smtp_settings = {
-    domain: 'http://localhost:3001',
+    domain: 'https://ibdb-rails-backend.herokuapp.com' ,
   address:        "smtp.sendgrid.net",
   port:            587,
   authentication: :plain,
