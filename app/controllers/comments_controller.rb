@@ -46,18 +46,27 @@ class CommentsController < ApplicationController
 
   def destroy
     auth_token = request.headers['X-User-Token']
-    if @comment.user.authentication_token == auth_token || User.find(1).authentication_token == auth_token
-      @comment.destroy
+ 
+    user = User.find(params[:user_id])
+
+    if auth_token === user.authentication_token
+      if user.moderator_role || user.admin_role || user.superadmin
+        @comment.destroy
       render json: @comment.as_json, status: :ok
-    else
+      else
+        if @comment.user.id === user.id
+          @comment.destroy
+          render json: @comment.as_json, status: :ok
+      end
+    end
+    else    
       render json: { error: true, message: 'Cant verify csrf token.' },
              status: 401
       head(:unauthorized)
-  end
+      
+    end
     # @comment.destroy
-    # respond_to do |format|
-    #   format.js { @comment }
-    # end
+    # redirect_to reviews_url, notice: 'Review was successfully destroyed.'
   end
 
   def set_comment
