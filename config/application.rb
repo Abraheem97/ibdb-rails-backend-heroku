@@ -25,6 +25,15 @@ module Ibdb
                  methods: %i[get post put patch delete options head],
                  credentials: true
       end
+
+      allow do
+        origins ['https://ibdb-production.herokuapp.com']
+
+        resource '*',
+                 headers: :any,
+                 methods: %i[get post put patch delete options head],
+                 credentials: true
+      end
     end
 
     # Settings in config/environments/* take precedence over those specified here.
