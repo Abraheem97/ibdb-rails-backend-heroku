@@ -69,14 +69,14 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: 'https://ibdb-rails-backend.herokuapp.com' }
 
   config.action_mailer.smtp_settings = {
-    user_name: 'noreplyibdb@gmail.com',
-    password: 'password123Abr',
-    domain: 'gmail.com',
-    address: 'smtp.gmail.com',
-    port: '587',
-    authentication: :plain,
-    enable_starttls_auto: true
+    domain: 'https://ibdb-rails-backend.herokuapp.com',
+  address:        "smtp.sendgrid.net",
+  port:            587,
+  authentication: :plain,
+  user_name:      'apikey',
+  password:       ENV['SENDGRID_API_KEY']
   }
+
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.

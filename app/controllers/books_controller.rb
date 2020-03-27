@@ -4,6 +4,7 @@ class BooksController < ApplicationController
   before_action :find_book, only: %i[show edit destroy update upvote add_author show_author]
 
   def index
+   
     if params[:search]
       @pagy, @books = pagy(Book.by_both(params[:search]), items: 3)
     else

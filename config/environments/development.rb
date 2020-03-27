@@ -54,16 +54,16 @@ Rails.application.configure do
 
   config.action_mailer.delivery_method = :smtp
 
-  config.action_mailer.default_url_options = { host: 'ibdb-rails-backend.herokuapp.com' }
+  config.action_mailer.default_url_options = { host: 'http://localhost:3001/' }
+
 
   config.action_mailer.smtp_settings = {
-    user_name: Rails.application.secrets.mail_username,
-    password: Rails.application.secrets.mail_password,
-    domain: 'gmail.com',
-    address: 'smtp.gmail.com',
-    port: '587',
-    authentication: :plain,
-    enable_starttls_auto: true
+    domain: 'http://localhost:3001',
+  address:        "smtp.sendgrid.net",
+  port:            587,
+  authentication: :plain,
+  user_name:      'apikey',
+  password:       ENV['SENDGRID_API_KEY']
   }
 
   # Raises error for missing translations
