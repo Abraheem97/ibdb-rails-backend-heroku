@@ -37,11 +37,32 @@ class CommentsController < ApplicationController
   end
 
   def update
-    if @comment.update(comment_params)
-      redirect_to @book, notice: 'Comment was successfully updated.'
+
+     auth_token = request.headers['X-User-Token']
+    
+
+    if @comment.user.authentication_token == auth_token
+      @comment.update(comment_params)
+      render json: @comment.as_json, status: :ok
     else
-      render :edit
+      render json: { error: true, message: 'Cant verify csrf token.' },
+             status: 401
+      head(:unauthorized)
     end
+
+    # if @comment.update(comment_params)
+    #   render json: @comment.as_json, status: :ok
+    # else
+    #   render json: { error: true, message: 'Cant verify csrf token.' },
+    #   status: 401
+    #   head(:unauthorized)
+    # end
+   
+    # if @comment.update(comment_params)
+    #   redirect_to @book, notice: 'Comment was successfully updated.'
+    # else
+    #   render :edit
+    # end
   end
 
   def destroy

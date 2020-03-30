@@ -43,11 +43,18 @@ class ReviewsController < ApplicationController
   end
 
   def update
-    if @review.update(review_params)
-      redirect_to @book, notice: 'Review was successfully updated.'
+    auth_token = request.headers['X-User-Token']
+    
+
+    if @review.user.authentication_token == auth_token
+      @review.update(review_params)
+      render json: @review.as_json, status: :ok
     else
-      render :edit
+      render json: { error: true, message: 'Cant verify csrf token.' },
+             status: 401
+      head(:unauthorized)
     end
+
   end
 
   def destroy
