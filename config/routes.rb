@@ -17,9 +17,11 @@ Rails.application.routes.draw do
   namespace :v1 do
     resources :sessions, only: %i[create destroy]
     get '/:id/user', controller: 'users', action: 'index'
+    get '/:id/user_details', controller: 'users' , action: 'getUser'
     get '/:user_id/:book_id/bookreviewed', controller: 'users', action: 'hasReviewedBook'
     get '/author/:id/books', controller: 'authors', action: 'getBooks'
     get '/authors', controller: 'authors', action: 'getAuthors'
+    patch '/update_user/:user_id', controller: 'users', action: 'update'
   end
   mount ActionCable.server => '/cable'
 end
