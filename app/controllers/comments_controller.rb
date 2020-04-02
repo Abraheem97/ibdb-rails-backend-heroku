@@ -67,7 +67,6 @@ class CommentsController < ApplicationController
 
   def destroy
     auth_token = request.headers['X-User-Token']
- 
     user = User.find(params[:user_id])
 
     if auth_token === user.authentication_token
@@ -97,7 +96,7 @@ class CommentsController < ApplicationController
   private
 
   def comment_params
-    params.require(:comment).permit(:body, :parent_id, :image, :user_id)
+    params.require(:comment).permit(:body, :parent_id, :image, :user_id, :image_url)
   end
 
   def set_book
