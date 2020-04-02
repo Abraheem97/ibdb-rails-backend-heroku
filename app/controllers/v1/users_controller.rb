@@ -3,7 +3,7 @@ class V1::UsersController < ApplicationController
     respond_to do |format|
       format.json do
         user = User.find(params[:id])
-        render json: user, only: %i[email image_url], status: :ok
+        render json: user, only: %i[email image_url firstName lastName], status: :ok
       end
     end
 end
@@ -17,7 +17,7 @@ def getUser
   respond_to do |format|
     format.json do     
       if user.authentication_token == auth_token
-      render json: user, only: %i[email image_url unconfirmed_email] ,status: :ok
+      render json: user, only: %i[email image_url unconfirmed_email firstName lastName] ,status: :ok
       
       else 
         render json: { error: true, message: 'Cant verify csrf token.' },
@@ -29,13 +29,12 @@ def getUser
 end
 
 def update
-  
   auth_token = request.headers['X-User-Token']
     @user = User.find(params[:user_id])
    
   if @user.authentication_token == auth_token && @user.valid_password?(params[:user][:current_password])
     @user.update(user_params)
-    render json: @user, only: %i[email image_url unconfirmed_email authentication_token] , status: :ok
+    render json: @user, only: %i[email image_url unconfirmed_email authentication_token firstName lastName] , status: :ok
   else
     render json: { error: true, message: 'Cant verify csrf token.' },
            status: 402
@@ -60,6 +59,6 @@ end
 
 
   def user_params
-    params.require(:user).permit(:email, :password, :image_url, :password_confirmation)
+    params.require(:user).permit(:email, :password, :image_url, :password_confirmation, :firstName ,:lastName)
   end
 end
