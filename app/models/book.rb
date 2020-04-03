@@ -12,6 +12,11 @@ class Book < ApplicationRecord
     unless image_url
       self.image_url = image.url
       self.save
-    end
+    else
+      require "open-uri"
+      self.image = open(self.image_url)
+      self.save  
+      end
+ 
   end
 end
