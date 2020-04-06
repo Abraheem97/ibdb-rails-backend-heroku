@@ -14,8 +14,10 @@ class Book < ApplicationRecord
       self.save
     else
       require "open-uri"
+      if(self.image_url!= "")
       self.image = open(self.image_url)
-      self.save  
+      self.save
+      end  
       end
  
   end

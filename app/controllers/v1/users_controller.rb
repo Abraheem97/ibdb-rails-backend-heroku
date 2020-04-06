@@ -61,4 +61,16 @@ end
   def user_params
     params.require(:user).permit(:email, :password, :image_url, :password_confirmation, :firstName ,:lastName)
   end
+
+
+    def verifyAccount
+      
+    auth_token = request.headers['X-User-Token']
+    user = User.find(params[:id])
+    if user&.valid_password?(params[:password]) && user&.authentication_token == auth_token
+      render json: { message: 'Account verified' }, status: 200
+    else 
+      render json: { error: true, message: 'Account not found' }, status: 401
+    end
+    end
 end

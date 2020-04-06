@@ -22,6 +22,7 @@ Rails.application.routes.draw do
     get '/author/:id/books', controller: 'authors', action: 'getBooks'
     get '/authors', controller: 'authors', action: 'getAuthors'
     patch '/update_user/:user_id', controller: 'users', action: 'update'
+    post '/verifyAccount', controller: 'users', action: 'verifyAccount'
   end
   mount ActionCable.server => '/cable'
 end
