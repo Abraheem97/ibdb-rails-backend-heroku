@@ -4,7 +4,6 @@ class BooksController < ApplicationController
   before_action :find_book, only: %i[show edit destroy update upvote add_author show_author]
 
   def index
-   
     if params[:search]
       @pagy, @books = pagy(Book.by_both(params[:search]), items: 3)
     else
@@ -19,6 +18,16 @@ class BooksController < ApplicationController
     end
   end
 
+
+  def getBooks
+    respond_to do |format|
+      format.json do
+        
+        book_json = Book.limit(params[:numOfBooks]).offset(params[:startIndex])
+        render(json: book_json, status: :ok)
+      end
+    end
+  end
   def show
     @comment = Comment.new
     @pagy, @comments = pagy(@book.comments.where(parent_id: nil).order('created_at DESC'), items: 10)

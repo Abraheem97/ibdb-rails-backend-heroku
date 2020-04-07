@@ -6,7 +6,6 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_attached_file :avatar, styles: { medium: '100x100>', thumb: '59x59>' }, storage: :cloudinary, path: ':id/:style/:filename'
   validates_attachment_content_type :avatar, content_type: %r{\Aimage/.*\z}
- 
 
   def username
     email.split('@').first
@@ -15,8 +14,6 @@ class User < ApplicationRecord
   def self.current
     Thread.current[:user]
   end
-
-
 
   def self.current=(user)
     Thread.current[:user] = user

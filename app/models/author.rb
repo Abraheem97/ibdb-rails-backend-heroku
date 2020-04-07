@@ -6,6 +6,6 @@ class Author < ApplicationRecord
 
   def set_image_path
     self.image_url = image.url
-    self.save
+    save
   end
 end

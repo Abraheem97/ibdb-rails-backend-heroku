@@ -44,7 +44,6 @@ class ReviewsController < ApplicationController
 
   def update
     auth_token = request.headers['X-User-Token']
-    
 
     if @review.user.authentication_token == auth_token
       @review.update(review_params)
@@ -54,29 +53,28 @@ class ReviewsController < ApplicationController
              status: 401
       head(:unauthorized)
     end
-
   end
 
   def destroy
     auth_token = request.headers['X-User-Token']
- 
+
     user = User.find(params[:user_id])
 
     if auth_token === user.authentication_token
       if user.moderator_role || user.admin_role || user.superadmin
         @review.destroy
-      render json: @review.as_json, status: :ok
+        render json: @review.as_json, status: :ok
       else
         if @review.user.id === user.id
           @review.destroy
           render json: @review.as_json, status: :ok
       end
     end
-    else    
+    else
       render json: { error: true, message: 'Cant verify csrf token.' },
              status: 401
       head(:unauthorized)
-      
+
     end
     # @review.destroy
     # redirect_to reviews_url, notice: 'Review was successfully destroyed.'

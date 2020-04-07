@@ -9,16 +9,15 @@ class Book < ApplicationRecord
   has_many :comments
 
   def set_image_path
-    unless image_url
-      self.image_url = image.url
-      self.save
-    else
-      require "open-uri"
-      if(self.image_url!= "")
-      self.image = open(self.image_url)
-      self.save
-      end  
+    if image_url
+      require 'open-uri'
+      if image_url != ''
+        self.image = open(image_url)
+        save
       end
- 
+    else
+      self.image_url = image.url
+      save
+    end
   end
 end

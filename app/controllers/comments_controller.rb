@@ -1,7 +1,7 @@
 # Controller for comments
 class CommentsController < ApplicationController
   before_action :set_comment, only: %i[show edit destroy update]
-  before_action :set_book
+  before_action :set_book, except: %i[getReplies]
 
   def index
     respond_to do |format|
@@ -35,11 +35,28 @@ class CommentsController < ApplicationController
     #    @reply = @comment
     #  end
   end
+  def getComments
+    respond_to do |format|
+      format.json do        
+        comments = @book.comments.where(parent_id: nil).limit(params[:numOfComments]).offset(params[:startIndex])
+        render(json: comments, status: :ok)
+      end
+    end
+  end
+
+  def getReplies
+    respond_to do |format|
+      format.json do        
+        @comment= Comment.find(params[:comment_id]) 
+         replies = @comment.replies 
+        render(json: replies, status: :ok)
+      end
+    end
+  end
+
 
   def update
-
-     auth_token = request.headers['X-User-Token']
-    
+    auth_token = request.headers['X-User-Token']
 
     if @comment.user.authentication_token == auth_token
       @comment.update(comment_params)
@@ -57,7 +74,7 @@ class CommentsController < ApplicationController
     #   status: 401
     #   head(:unauthorized)
     # end
-   
+
     # if @comment.update(comment_params)
     #   redirect_to @book, notice: 'Comment was successfully updated.'
     # else
@@ -72,18 +89,18 @@ class CommentsController < ApplicationController
     if auth_token === user.authentication_token
       if user.moderator_role || user.admin_role || user.superadmin
         @comment.destroy
-      render json: @comment.as_json, status: :ok
+        render json: @comment.as_json, status: :ok
       else
         if @comment.user.id === user.id
           @comment.destroy
           render json: @comment.as_json, status: :ok
       end
     end
-    else    
+    else
       render json: { error: true, message: 'Cant verify csrf token.' },
              status: 401
       head(:unauthorized)
-      
+
     end
     # @comment.destroy
     # redirect_to reviews_url, notice: 'Review was successfully destroyed.'
