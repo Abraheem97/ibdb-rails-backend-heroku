@@ -38,7 +38,7 @@ class CommentsController < ApplicationController
   def getComments
     respond_to do |format|
       format.json do        
-        comments = @book.comments.where(parent_id: nil).limit(params[:numOfComments]).offset(params[:startIndex])
+        comments = @book.comments.where(parent_id: nil).limit(params[:numOfComments]).offset(params[:startIndex]).order('created_at DESC')
         render(json: comments, status: :ok)
       end
     end
