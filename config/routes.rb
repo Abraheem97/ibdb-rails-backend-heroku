@@ -16,9 +16,12 @@ Rails.application.routes.draw do
   get 'books/:startIndex/:numOfBooks', controller: 'books', action: 'getBooks'
   get 'comments/:book_id/:startIndex/:numOfComments', controller: 'comments', action: 'getComments'
   get 'replies/:comment_id', controller: 'comments', action: 'getReplies'
+  get 'searchBooks/:search', controller: 'books', action: 'getBooksBySearch'
+
 
   namespace :v1 do
     resources :sessions, only: %i[create destroy]
+    
     get '/:id/user', controller: 'users', action: 'index'
     get '/:id/user_details', controller: 'users', action: 'getUser'
     get '/:user_id/:book_id/bookreviewed', controller: 'users', action: 'hasReviewedBook'
@@ -26,6 +29,7 @@ Rails.application.routes.draw do
     get '/authors', controller: 'authors', action: 'getAuthors'
     patch '/update_user/:user_id', controller: 'users', action: 'update'
     post '/verifyAccount', controller: 'users', action: 'verifyAccount'
+    
   end
   mount ActionCable.server => '/cable'
 end
