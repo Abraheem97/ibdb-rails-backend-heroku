@@ -6,14 +6,14 @@ class Book < ApplicationRecord
   has_attached_file :image, styles: { medium: '250x300>' }, storage: :cloudinary, path: ':id/:style/:filename'
   validates_attachment_content_type :image, content_type: %r{\Aimage/.*\Z}
   belongs_to :author
-  has_many :reviews
-  has_many :comments
+  has_many :reviews dependent: :destroy
+  has_many :comments dependent: :destroy
 
   def set_image_path
     if image_url
       require 'open-uri'
       if image_url != ''
-        self.image = open(image_url)
+        self.image = open(self.image_url)
         save
       end
     else
