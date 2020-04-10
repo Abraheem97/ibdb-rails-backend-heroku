@@ -19,7 +19,7 @@ class BooksController < ApplicationController
   end
 
   def getBooksBySearch 
-    sleep 0.5
+    
    @books =  Book.by_both(params[:search].downcase)
    respond_to do |format|
     format.json do     

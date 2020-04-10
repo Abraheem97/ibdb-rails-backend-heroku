@@ -5,7 +5,9 @@ class Author < ApplicationRecord
   has_many :books, dependent: :destroy
 
   def set_image_path
-    self.image_url = image.url
-    save
+    if(!self.image_url)
+      self.image_url = image.url
+      save
+    end
   end
 end

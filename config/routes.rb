@@ -20,8 +20,9 @@ Rails.application.routes.draw do
 
 
   namespace :v1 do
+    resources :authors, only: %i[create]
     resources :sessions, only: %i[create destroy]
-    
+    get '/author/:id', controller: 'authors', action:'getAuthor'
     get '/:id/user', controller: 'users', action: 'index'
     get '/:id/user_details', controller: 'users', action: 'getUser'
     get '/:user_id/:book_id/bookreviewed', controller: 'users', action: 'hasReviewedBook'
