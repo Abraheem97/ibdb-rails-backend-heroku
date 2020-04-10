@@ -6,8 +6,8 @@ class Book < ApplicationRecord
   has_attached_file :image, styles: { medium: '250x300>' }, storage: :cloudinary, path: ':id/:style/:filename'
   validates_attachment_content_type :image, content_type: %r{\Aimage/.*\Z}
   belongs_to :author
-  has_many :reviews dependent: :destroy
-  has_many :comments dependent: :destroy
+  has_many :reviews, dependent: :destroy
+  has_many :comments, dependent: :destroy
 
   def set_image_path
     if image_url
