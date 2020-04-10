@@ -55,8 +55,9 @@ Rails.application.configure do
 
   # Prepend all log lines with the following tags.
   config.log_tags = [:request_id]
-  config.paperclip_defaults = { storage: :cloudinary, path: ':id/:style/:filename.:extension', url: '/:id/:style/:filename.:extension', cloudinary_credentials: Rails.root.join("config/cloudinary.yml"), secure: true, }
 
+  config.active_storage.service = :local
+ 
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
 
